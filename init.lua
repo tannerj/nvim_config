@@ -1,14 +1,3 @@
-vim.cmd("syntax on")
-vim.cmd("set nu")
-vim.cmd("set tabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.cmd("set expandtab")
-vim.cmd("set autoindent")
-vim.cmd("set clipboard=unnamed")
-vim.cmd("set backspace=indent,eol,start")
---git commit message settings
-vim.cmd("autocmd Filetype gitcommit setlocal spell textwidth=72")
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -32,29 +21,5 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Setup lazy.nvim
-local plugins = {
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}
-}
-local opts = {}
-
-require("lazy").setup(plugins, opts)
-
-local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-
-local configs = require("nvim-treesitter.configs")
-configs.setup({
-  ensure_installed = {"lua", "javascript", "ruby"},
-  highlight = { enable = true },
-  indent = { enable = true }
-})
-
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
+require("vim_options")
+require("lazy").setup("plugins")
