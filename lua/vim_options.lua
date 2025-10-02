@@ -8,4 +8,3 @@ vim.cmd("set clipboard=unnamed")
 vim.cmd("set backspace=indent,eol,start")
 --git commit message settings
 vim.cmd("autocmd Filetype gitcommit setlocal spell textwidth=72")
-
